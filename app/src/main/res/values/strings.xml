@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">RecyclerViewDemoApp</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="action_vertical_list">Vertical List</string>
+    <string name="action_horizontal_list">Horizontal List</string>
+    <string name="action_grid_view">Grid View</string>
+    <string name="action_vertical_grid_view_staggered">Vertical StaggeredGridView</string>
+    <string name="action_horizontal_grid_view_staggered">Horizontal StaggeredGridView</string>
+</resources>
