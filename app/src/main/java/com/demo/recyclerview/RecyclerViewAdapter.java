@@ -89,8 +89,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ListItemViewHolder
                 holder.imgView.setImageResource(R.drawable.lollipop_h3);
             }
         }
-        //holder.itemView.setActivated(selectedItems.get(position, false));
-
     }
 
     /**

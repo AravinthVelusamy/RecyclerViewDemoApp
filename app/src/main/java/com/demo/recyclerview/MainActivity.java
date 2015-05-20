@@ -27,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        /** Return false so that we can capture {@link PlaceholderFragment#onOptionsItemSelected(android.view.MenuItem)} events in {@link PlaceholderFragment} Fragment*/
         return false;
     }
 
@@ -34,12 +35,6 @@ public class MainActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
-//            case R.id.action_add_item:
-//                attachFragment(TYPE_VERTICAL_LIST);
-//                break;
-//            case R.id.action_delete_item:
-//                attachFragment(TYPE_VERTICAL_LIST);
-//                break;
             case R.id.action_vertical_list:
                 attachFragment(TYPE_VERTICAL_LIST);
                 break;
@@ -58,10 +53,10 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-        //return false;
     }
 
 
+    /** Attach placeholder fragment here and show different kind of RecyclerView flavours eg List or grid based on user selection in the options menu.*/
     private void attachFragment(String type){
         Bundle bundle = new Bundle();
         bundle.putString(TYPE, type);
