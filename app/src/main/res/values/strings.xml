@@ -9,4 +9,6 @@
     <string name="action_grid_view">Grid View</string>
     <string name="action_vertical_grid_view_staggered">Vertical StaggeredGridView</string>
     <string name="action_horizontal_grid_view_staggered">Horizontal StaggeredGridView</string>
+    <string name="action_add_item">Add Item</string>
+    <string name="action_delete_item">Delete Row</string>
 </resources>

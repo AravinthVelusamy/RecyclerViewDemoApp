@@ -27,13 +27,19 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        return false;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
+//            case R.id.action_add_item:
+//                attachFragment(TYPE_VERTICAL_LIST);
+//                break;
+//            case R.id.action_delete_item:
+//                attachFragment(TYPE_VERTICAL_LIST);
+//                break;
             case R.id.action_vertical_list:
                 attachFragment(TYPE_VERTICAL_LIST);
                 break;
@@ -52,6 +58,7 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+        //return false;
     }
 
 
@@ -62,4 +69,7 @@ public class MainActivity extends ActionBarActivity {
         placeholderFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.container, placeholderFragment).commit();
     }
+
 }
+
+

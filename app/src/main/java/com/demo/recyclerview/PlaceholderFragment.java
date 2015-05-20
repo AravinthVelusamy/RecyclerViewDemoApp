@@ -7,7 +7,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,10 +20,15 @@ import java.util.ArrayList;
  */
 public class PlaceholderFragment extends Fragment {
 
+    private static final String TAG = "PlaceholderFragment";
     /*Number of columns in the grid view*/
     private static final int NUM_OF_COLUMNS = 2;
     /*Total number of items in the RecyclerView*/
     private static final int NUM_OF_ITEMS = 100;
+    private ArrayList<DataModel> mDataModels;
+    private RecyclerView recyclerView;
+    private RecyclerViewAdapter recyclerViewAdapter;
+    private int addItemCount = 0;
 
 
     public PlaceholderFragment() {
@@ -29,8 +36,10 @@ public class PlaceholderFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        //Must be set in order to capture menu item click events. If you don't set it, it will not show the menu items set in the Activity holding this fragment.
+        setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        RecyclerView recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerview);
+        recyclerView = (RecyclerView)rootView.findViewById(R.id.recyclerview);
 
 
         RecyclerView.LayoutManager layoutManager = null;
@@ -60,7 +69,8 @@ public class PlaceholderFragment extends Fragment {
         }
 
         recyclerView.setLayoutManager(layoutManager);
-        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(getDataModelList(), type);
+        mDataModels = getDataModelList();
+        recyclerViewAdapter = new RecyclerViewAdapter(mDataModels, type);
 
         /*Third party ItemDecoration found from https://gist.github.com/alexfu/0f464fc3742f134ccd1e*/
         RecyclerView.ItemDecoration verticalDivider  = new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST);
@@ -76,6 +86,24 @@ public class PlaceholderFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_add_item:
+                Log.d(TAG, "itemId:"+item.getTitle());
+                addItem();
+                break;
+            case R.id.action_delete_item:
+                Log.d(TAG, "itemId:"+item.getTitle());
+                deleteItem();
+                break;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     /** Creates and returns the data items to be shown in the Recycler View*/
     private ArrayList<DataModel> getDataModelList(){
         ArrayList<DataModel> dataModels = new ArrayList<>();
@@ -85,6 +113,23 @@ public class PlaceholderFragment extends Fragment {
         }
 
         return dataModels;
+    }
+
+
+    /** Adds a single item in the existing list*/
+    private final void addItem(){
+        //Adding item at top second position(i.e. at index 1).
+        mDataModels.set(1, new DataModel("Added Item "+String.valueOf(++addItemCount)));
+        //See for similar methods to know more item insertion options
+        recyclerViewAdapter.notifyItemInserted(1);
+    }
+
+    /** Deletes a single item from the existing list*/
+    private void deleteItem(){
+        //Removing top item
+        mDataModels.remove(0);
+        //See for similar methods to know more item removing options
+        recyclerViewAdapter.notifyItemRemoved(0);
     }
 
 }
